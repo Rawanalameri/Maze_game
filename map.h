@@ -1,7 +1,7 @@
 #ifndef MAP_H
 #define MAP_H
+#include "textures.h"
 
-#include "player.h"
 
 char** allouer_tab_2D(int n,int m);
 void afficher_map(char** tab,int n,int m);

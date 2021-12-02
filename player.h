@@ -1,8 +1,9 @@
 #ifndef PLAYER_H
 #define PLAYER_H
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
+#include "map.h"
+
+#define PLAYERH 32
+#define PLAYERW 32
 
 typedef struct player_s
 {
@@ -11,14 +12,18 @@ typedef struct player_s
     int width;
     int height;
     int score;
-    int chances;
+    SDL_Rect DestR;
+    SDL_Rect Src;
+    int speed;
 }player_t;
 
-void init_player(player_t *player,char** tab,int nbl,int nbc,int w,int h);
+player_t* init_player(int posc,int posl);
+void change_movement_player(player_t* player,int posc,int posl);
 bool handle_movement_up(char** tab,player_t*player);
 bool handle_movement_down(char** tab,player_t*player);
 bool handle_movement_left(char** tab,player_t*player);
 bool handle_movement_right(char** tab,player_t*player);
 void movement(char** tab,player_t *player,char deplacement);
+void free_player(player_t* player);
 
 #endif

@@ -1,24 +1,47 @@
 #include "player.h"
 
-void init_player(player_t *player,char** tab,int nbl,int nbc,int w,int h){
-    for (int i=0;i<nbl;i++){
-        for (int j= 0; j < nbc; j++)
-        {
-            if(tab[i][j]=='P'){
-                player->x=i;
-                player->y=j;
-            }
-        }   
-    }
+player_t* init_player(int posc,int posl){
+    player_t* player= malloc(sizeof(player_t));
+    player->x=1;
+    player->y=1;   
     player->score=0;
-    player->chances=3;
-    player->height=h;
-    player->width=w;
+    player->height=PLAYERH;
+    player->width=PLAYERW;
+    player->DestR.h=PLAYERH;
+    player->DestR.w=PLAYERW;
+    player->DestR.x=PLAYERW*posc;
+    player->DestR.y=PLAYERH*posl;
+    player->Src.w=PLAYERW;
+    player->Src.h=PLAYERH;
+    player->Src.x=PLAYERW*player->x;
+    player->Src.y=PLAYERH*player->y;
+    return player;
 }
 
+void change_movement_player(player_t* player,int posc,int posl){
+    player->DestR.x=PLAYERW*posc;
+    player->DestR.y=PLAYERH*posl;
+}
+
+
+/*
+void gameOver(char** tab,int nbl,int nbc,player_t* player){
+    for (int i = 0; i<nbl ; i++)
+    {
+        for (int j = 0; j<nbc; j++)
+        {
+           if(tab[i][j]=='S'){
+               if(player->x==j&& player->y==i){
+                   player->gameover=1;
+               }
+           }
+        }
+    }
+}
+*/
 bool handle_movement_up(char** tab,player_t*player)
 {
-    if (tab[player->y-1][player->x]=='L'){
+    if (tab[player->y-1][player->x]=='L'|| tab[player->y-1][player->x]=='S'){
         return true;
     }
     else{
@@ -28,7 +51,7 @@ bool handle_movement_up(char** tab,player_t*player)
 
 bool handle_movement_down(char** tab,player_t*player)
 {
-    if (tab[player->y+1][player->x]=='L'){
+    if (tab[player->y+1][player->x]=='L'|| tab[player->y+1][player->x]=='S'){
         return true;
     }
     else{
@@ -38,7 +61,7 @@ bool handle_movement_down(char** tab,player_t*player)
 }
 bool handle_movement_left(char** tab,player_t*player)
 {
-    if (tab[player->y][player->x-1]=='L'){
+    if (tab[player->y][player->x-1]=='L'|| tab[player->y][player->x-1]=='S'){
         return true;
     }
     else{
@@ -47,7 +70,7 @@ bool handle_movement_left(char** tab,player_t*player)
 }
 bool handle_movement_right(char** tab,player_t*player)
 {
-    if (tab[player->y][player->x+1]=='L'){
+    if (tab[player->y][player->x+1]=='L'||tab[player->y][player->x+1]=='S'){
         return true;
     }
     else{
@@ -55,7 +78,7 @@ bool handle_movement_right(char** tab,player_t*player)
     }
 }
 
-void movement(char** tab,player_t *player,char deplacement){   
+void movement(char** tab,player_t *player,char deplacement){
         switch (deplacement)
         {
         case 'z':
@@ -79,4 +102,8 @@ void movement(char** tab,player_t *player,char deplacement){
             }
             break;
         }
+}
+
+void free_player(player_t* player){
+    free(player);
 }
