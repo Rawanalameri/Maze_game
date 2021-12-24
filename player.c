@@ -15,17 +15,24 @@ player_t* init_player(int posc,int posl){
     player->Src.h=PLAYERH;
     player->Src.x=PLAYERW*player->x;
     player->Src.y=PLAYERH*player->y;
+    player->lives=3;
+    player->gameover=0;
     return player;
 }
 
 void change_movement_player(player_t* player,int posc,int posl){
+    player->DestR.h=PLAYERH;
+    player->DestR.w=PLAYERW;
     player->DestR.x=PLAYERW*posc;
     player->DestR.y=PLAYERH*posl;
+    player->Src.w=PLAYERW;
+    player->Src.h=PLAYERH;
+    player->Src.x=PLAYERW*player->x;
+    player->Src.y=PLAYERH*player->y;
 }
 
 
-/*
-void gameOver(char** tab,int nbl,int nbc,player_t* player){
+void gamrover(player_t* player,char** tab, int nbc,int nbl){
     for (int i = 0; i<nbl ; i++)
     {
         for (int j = 0; j<nbc; j++)
@@ -38,7 +45,7 @@ void gameOver(char** tab,int nbl,int nbc,player_t* player){
         }
     }
 }
-*/
+
 bool handle_movement_up(char** tab,player_t*player)
 {
     if (tab[player->y-1][player->x]=='L'|| tab[player->y-1][player->x]=='S'){
