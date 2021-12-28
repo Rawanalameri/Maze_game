@@ -21,12 +21,8 @@ player_t* init_player(int posc,int posl){
 }
 
 void change_movement_player(player_t* player,int posc,int posl){
-    player->DestR.h=PLAYERH;
-    player->DestR.w=PLAYERW;
     player->DestR.x=PLAYERW*posc;
     player->DestR.y=PLAYERH*posl;
-    player->Src.w=PLAYERW;
-    player->Src.h=PLAYERH;
     player->Src.x=PLAYERW*player->x;
     player->Src.y=PLAYERH*player->y;
 }
@@ -90,22 +86,22 @@ void movement(char** tab,player_t *player,char deplacement){
         {
         case 'z':
             if(handle_movement_up(tab,player)){
-                player->y--;
+                player->y -= SPEED;
             }
             break;
         case 's':
             if(handle_movement_down(tab,player)){
-                player->y++;
+                player->y+=SPEED;
             }
             break;
         case 'd':
             if(handle_movement_right(tab,player)){
-                player->x++;
+                player->x+=SPEED;
             }
             break;
         case 'q':
             if(handle_movement_left(tab,player)){
-                player->x--;
+                player->x-=SPEED;
             }
             break;
         }

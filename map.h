@@ -1,6 +1,10 @@
 #ifndef MAP_H
 #define MAP_H
-#include "textures.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <SDL2/SDL.h>
 
 
 char** allouer_tab_2D(int n,int m);
