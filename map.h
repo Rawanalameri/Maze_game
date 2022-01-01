@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 
 
 char** allouer_tab_2D(int n,int m);

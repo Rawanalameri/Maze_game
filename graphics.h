@@ -10,7 +10,7 @@
 
 typedef struct walls_s
 {
-    SDL_Rect bricks;
+    SDL_Rect DestR;
     SDL_Rect Src;
     SDL_Texture* texture_joueur;
     SDL_Texture* texture_brick;
@@ -22,6 +22,9 @@ SDL_Texture* charger_image (const char* nomfichier, SDL_Renderer* renderer);
 void apply_texture(walls_t* walls,SDL_Renderer* ecran);
 void init_wall(walls_t* walls,int px,int py,int postx,int posty);
 void affichage_bricks(SDL_Renderer* ecran,walls_t* walls,char** map,int nbc,int nbl);
-void handle_events(SDL_Event *event,player_t* player,char** map);
+void affichage_joueur(player_t* player,walls_t* walls,SDL_Renderer* ecran);
+void change_movement_player(player_t* player,walls_t* walls,int posc,int posl);
+void handle_events(SDL_Event *event,walls_t* walls,player_t* player,char** map);
+//void apply_text(SDL_Renderer* ecran,int x,int y,int width,int height,const char* message);
 void clean_walls(walls_t* walls);
 #endif

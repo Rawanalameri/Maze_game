@@ -1,9 +1,13 @@
-#include "graphics.h"
+#include "trap.h"
 
 
 int main()
 {
-    int nbl = 0,nbc = 0;
+    trap_t trap1= {"the capital of france","paris"};
+    trap_t trap2= {"light bulb inventor","tesla"};
+    trap_t trap3={"the origine of the frensh language","latin"};
+    trap_t trap4={"Who won the world cup in 2006","italy"};
+    int nbl = 0,nbc = 0,i=0;
     char** map =lire_map("ressources/maze_map.txt");//lire le fichier
     taille_map("ressources/maze_map.txt",&nbl,&nbc);
     player_t*player = init_player(0,2);//initialisation du joueur
@@ -17,11 +21,15 @@ int main()
     SDL_Event event;
     // Boucle principale
     while(!player->gameover){
-        handle_events(&event,player,map);
-        gamrover(player,map,nbc,nbl);
+        if (map[player->y][player->x]=='T'){
+            showTrap(trap1,player,&event);
+            map[player->y][player->x]='L';
+        }
+        handle_events(&event,walls,player,map);
+        gameover(player,map,nbc,nbl);
         SDL_RenderClear(ecran);
         affichage_bricks(ecran,walls,map,nbc,nbl);
-        SDL_RenderCopy(ecran,walls->texture_joueur,&(player->DestR),&(player->Src)); 
+        affichage_joueur(player,walls,ecran);
         SDL_RenderPresent(ecran);
         SDL_UpdateWindowSurface(fenetre);
     }

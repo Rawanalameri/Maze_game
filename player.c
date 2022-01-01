@@ -5,30 +5,15 @@ player_t* init_player(int posc,int posl){
     player->x=1;
     player->y=1;   
     player->score=0;
-    player->height=PLAYERH;
-    player->width=PLAYERW;
-    player->DestR.h=PLAYERH;
-    player->DestR.w=PLAYERW;
-    player->DestR.x=PLAYERW*posc;
-    player->DestR.y=PLAYERH*posl;
-    player->Src.w=PLAYERW;
-    player->Src.h=PLAYERH;
-    player->Src.x=PLAYERW*player->x;
-    player->Src.y=PLAYERH*player->y;
+    player->posc=posc;
+    player->posl=posl;
     player->lives=3;
     player->gameover=0;
     return player;
 }
 
-void change_movement_player(player_t* player,int posc,int posl){
-    player->DestR.x=PLAYERW*posc;
-    player->DestR.y=PLAYERH*posl;
-    player->Src.x=PLAYERW*player->x;
-    player->Src.y=PLAYERH*player->y;
-}
 
-
-void gamrover(player_t* player,char** tab, int nbc,int nbl){
+void gameover(player_t* player,char** tab, int nbc,int nbl){
     for (int i = 0; i<nbl ; i++)
     {
         for (int j = 0; j<nbc; j++)
@@ -40,11 +25,14 @@ void gamrover(player_t* player,char** tab, int nbc,int nbl){
            }
         }
     }
+    if (player->lives==0){
+        player->gameover=1;
+    }
 }
 
 bool handle_movement_up(char** tab,player_t*player)
 {
-    if (tab[player->y-1][player->x]=='L'|| tab[player->y-1][player->x]=='S'){
+    if (tab[player->y-1][player->x]=='L'|| tab[player->y-1][player->x]=='S' || tab[player->y-1][player->x]=='T'){
         return true;
     }
     else{
@@ -54,7 +42,7 @@ bool handle_movement_up(char** tab,player_t*player)
 
 bool handle_movement_down(char** tab,player_t*player)
 {
-    if (tab[player->y+1][player->x]=='L'|| tab[player->y+1][player->x]=='S'){
+    if (tab[player->y+1][player->x]=='L'|| tab[player->y+1][player->x]=='S'|| tab[player->y+1][player->x]=='T'){
         return true;
     }
     else{
@@ -64,7 +52,7 @@ bool handle_movement_down(char** tab,player_t*player)
 }
 bool handle_movement_left(char** tab,player_t*player)
 {
-    if (tab[player->y][player->x-1]=='L'|| tab[player->y][player->x-1]=='S'){
+    if (tab[player->y][player->x-1]=='L'|| tab[player->y][player->x-1]=='S'||tab[player->y][player->x-1]=='T'){
         return true;
     }
     else{
@@ -73,7 +61,7 @@ bool handle_movement_left(char** tab,player_t*player)
 }
 bool handle_movement_right(char** tab,player_t*player)
 {
-    if (tab[player->y][player->x+1]=='L'||tab[player->y][player->x+1]=='S'){
+    if (tab[player->y][player->x+1]=='L'||tab[player->y][player->x+1]=='S'||tab[player->y][player->x+1]=='T'){
         return true;
     }
     else{
