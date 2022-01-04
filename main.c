@@ -3,9 +3,9 @@
 
 int main()
 {
-    trap_t trap1= {"The capital of Yemen","Sanaa","Riyadh","Aden"};
+    trap_t trap1= {{"The capital of Yemen","Sanaa","Riyadh","Aden"}};
     //trap_t trap2= {"light bulb inventor","tesla"};
-    //trap_t trap3={"the origine of the frensh language","latin"};
+    //trap_t trap3={"the origin of the frensh language","latin"};
     //trap_t trap4={"Who won the world cup in 2006","italy"};
     int nbl = 0,nbc = 0,i=0;
     char** map =lire_map("ressources/maze_map.txt");//lire le fichier
@@ -18,12 +18,11 @@ int main()
     init_sdl(&fenetre,&ecran,SCREENW,SCREENH);
     // Charger l’images
     apply_texture(walls,ecran);
-    FontPosition_t fontPos=initFontPosition();
     SDL_Event event;
     // Boucle principale
     while(!player->gameover){
         if (map[player->y][player->x]=='T'){
-            showTrap(trap1,player,&event);
+            showTrap(trap1,player,&event,0);
             map[player->y][player->x]='L';
         }
         handle_events(&event,walls,player,map);
