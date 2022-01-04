@@ -61,19 +61,19 @@ void affichage_bricks(SDL_Renderer* ecran,walls_t* walls,char** map,int nbc,int 
         for (int j = 0; j< nbc; j++)
         {
             if(map[i][j]=='L'){
-                init_wall(walls,j,i,9,3);
+                init_wall(walls,j,i,11,0);
                 SDL_RenderCopy(ecran,walls->texture_brick,&(walls->DestR),&(walls->Src));       
             }
             else if(map[i][j]=='#'){
-                init_wall(walls,j,i,10,3);
+                init_wall(walls,j,i,6,9);
                 SDL_RenderCopy(ecran,walls->texture_brick,&(walls->DestR),&(walls->Src));              
             }
             else if (map[i][j]=='S'){
-                init_wall(walls,j,i,13,3);
+                init_wall(walls,j,i,5,2);
                 SDL_RenderCopy(ecran,walls->texture_brick,&(walls->DestR),&(walls->Src));
             }
             else if (map[i][j]=='T'){
-                init_wall(walls,j,i,13,4);
+                init_wall(walls,j,i,0,7);
                 SDL_RenderCopy(ecran,walls->texture_brick,&(walls->DestR),&(walls->Src));
             }
         }
@@ -133,22 +133,24 @@ void handle_events(SDL_Event *event,walls_t* walls,player_t* player,char** map){
         
     }
 }
-/*
-void apply_text(SDL_Renderer* ecran,int x,int y,int width,int height,const char* message){
-    TTF_Font* font=TTF_OpenFont("ressources/angelina.TTF",14);
-    SDL_Color white={255,255,255,255};
-    SDL_Surface* surfaceText=TTF_RenderText_Solid(font,message,white);
-    SDL_Texture* text=SDL_CreateTextureFromSurface(ecran,surfaceText);
-    SDL_Rect textRect;
-    textRect.h=height;
-    textRect.w=width;
-    textRect.x=x;
-    textRect.y=y;
-    TTF_CloseFont(font);
-    SDL_RenderCopy(ecran,text,NULL,&textRect);
-    SDL_FreeSurface(surfaceText);
-    SDL_DestroyTexture(text);
-}*/
+
+void gameover(player_t* player,char** tab, int nbc,int nbl){
+    for (int i = 0; i<nbl ; i++)
+    {
+        for (int j = 0; j<nbc; j++)
+        {
+           if(tab[i][j]=='S'){
+               if(player->x==j&& player->y==i){
+                   player->gameover=1;
+               }
+           }
+        }
+    }
+    if (player->lives==0){
+        player->gameover=1;
+    }
+}
+
 
 void clean_walls(walls_t* walls){
     SDL_DestroyTexture(walls->texture_joueur);

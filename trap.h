@@ -2,9 +2,6 @@
 #define TRAP_H
 #include "graphics.h"
 
-#define TRAPHT 60
-#define TRAPWT 120
-
 typedef struct trap_s{
     const char* text[4];
 }trap_t;

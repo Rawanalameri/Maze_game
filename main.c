@@ -3,10 +3,10 @@
 
 int main()
 {
-    trap_t trap1= {{"The capital of Yemen","Sanaa","Riyadh","Aden"}};
-    //trap_t trap2= {"light bulb inventor","tesla"};
-    //trap_t trap3={"the origin of the frensh language","latin"};
-    //trap_t trap4={"Who won the world cup in 2006","italy"};
+    trap_t trap1= {{"The capital of Yemen:","Sanaa","Riyadh","Aden"}};
+    trap_t trap2= {{"Light bulb inventor:","Edison","Tesla","Stern"}};
+    trap_t trap3={{"Origin of the frensh language:","Frisian","Peninsula","Latin"}};
+    trap_t* traps=init_trap(trap1,trap2,trap3);
     int nbl = 0,nbc = 0,i=0;
     char** map =lire_map("ressources/maze_map.txt");//lire le fichier
     taille_map("ressources/maze_map.txt",&nbl,&nbc);
@@ -21,24 +21,25 @@ int main()
     SDL_Event event;
     // Boucle principale
     while(!player->gameover){
+        gameover(player,map,nbc,nbl);
         if (map[player->y][player->x]=='T'){
-            showTrap(trap1,player,&event,0);
+            showTrap(traps[i],player,&event,i);
             map[player->y][player->x]='L';
+            i++;
         }
         handle_events(&event,walls,player,map);
-        gameover(player,map,nbc,nbl);
         SDL_RenderClear(ecran);
         affichage_bricks(ecran,walls,map,nbc,nbl);
         affichage_joueur(player,walls,ecran);
         SDL_RenderPresent(ecran);
         SDL_UpdateWindowSurface(fenetre);
     }
-
     // Libérer de la mémoire
     SDL_DestroyRenderer(ecran);
     desallouer_tab_2D(map,nbl);
     free_player(player);
     clean_walls(walls);
+    clean_trap(traps);
     // Quitter SDL
     SDL_DestroyWindow(fenetre);
     SDL_Quit();

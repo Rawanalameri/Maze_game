@@ -14,6 +14,7 @@ typedef struct player_s
     int posl;
     int score;
     int lives;
+    int lose;
     int gameover;
 }player_t;
 
@@ -24,7 +25,6 @@ bool handle_movement_left(char** tab,player_t*player);
 bool handle_movement_right(char** tab,player_t*player);
 bool handle_mouvement_trap(char** tab,player_t* player);
 void movement(char** tab,player_t *player,char deplacement);
-void gameover(player_t* player,char** tab, int nbc,int nbl);
 void free_player(player_t* player);
 
 #endif

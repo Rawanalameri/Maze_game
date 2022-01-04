@@ -9,25 +9,8 @@ player_t* init_player(int posc,int posl){
     player->posl=posl;
     player->lives=3;
     player->gameover=0;
+    player->lose=0;
     return player;
-}
-
-
-void gameover(player_t* player,char** tab, int nbc,int nbl){
-    for (int i = 0; i<nbl ; i++)
-    {
-        for (int j = 0; j<nbc; j++)
-        {
-           if(tab[i][j]=='S'){
-               if(player->x==j&& player->y==i){
-                   player->gameover=1;
-               }
-           }
-        }
-    }
-    if (player->lives==0){
-        player->gameover=1;
-    }
 }
 
 bool handle_movement_up(char** tab,player_t*player)

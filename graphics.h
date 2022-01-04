@@ -25,6 +25,6 @@ void affichage_bricks(SDL_Renderer* ecran,walls_t* walls,char** map,int nbc,int 
 void affichage_joueur(player_t* player,walls_t* walls,SDL_Renderer* ecran);
 void change_movement_player(player_t* player,walls_t* walls,int posc,int posl);
 void handle_events(SDL_Event *event,walls_t* walls,player_t* player,char** map);
-//void apply_text(SDL_Renderer* ecran,int x,int y,int width,int height,const char* message);
+void gameover(player_t* player,char** tab, int nbc,int nbl);
 void clean_walls(walls_t* walls);
 #endif
