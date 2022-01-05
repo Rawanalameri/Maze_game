@@ -92,9 +92,9 @@ char** modifier_caractere(char** tab,int n,int m,char ancien,char nouveau){
     }
     return tab;
 }
+
 void ecrire_map(const char* nomFichier, char** tab,int n){
     FILE* fichier=NULL;
-
     fichier =fopen(nomFichier,"w");
     if(fichier!= NULL){
         for (int i = 0; i < n; i++){

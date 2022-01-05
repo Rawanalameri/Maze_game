@@ -1,5 +1,10 @@
 # Maze_Game
 
+Fait par: AL-AMERI RAWAN
+          IKHRICHI SOUMAYA
+
+lien De Git: https://gitlab.univ-lorraine.fr/alameri1u/maze_game.git
+
 La compilation du jeu se fait dans le treminal avec la commande : make 
 L'execution: ./main 
 

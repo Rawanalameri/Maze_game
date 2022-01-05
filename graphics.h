@@ -3,8 +3,8 @@
 
 #include "player.h"
 
-#define SCREENH 600
-#define SCREENW 600
+#define SCREENH 700
+#define SCREENW 1370
 #define BRICKH 32
 #define BRICKW 32
 
